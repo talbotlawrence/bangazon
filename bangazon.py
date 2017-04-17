@@ -1,10 +1,10 @@
-class Department(object):
+class Department():
     """Parent class for all departments
 
-    Methods: name, supervisor, employee_count, location
+    Methods: name, supervisor, employee_count, location, meet
     """
 
-    def __init__(self, name, supervisor, employee_count, location, meet):
+    def __init__(self, name, supervisor, employee_count, location, meet):     #removed "meet" from this list
         self.employees = set()
         self.name = name
         self.supervisor = supervisor
@@ -100,3 +100,8 @@ class Department(object):
             self.__name = val
         else:
             raise ValueError("Gimme a room please!")
+
+#######################
+
+    def get_budget(self):
+        self.budget = 1000000

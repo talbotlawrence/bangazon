@@ -6,8 +6,8 @@ class HumanResources(Department):
     Methods: __init__, add_policy, get_policy, etc.
     """
 
-    def __init__(self, name, supervisor, employee_count, meet):
-        super().__init__()      #do I need to add anything here in the ()?
+    def __init__(self, name, supervisor, employee_count, location, meet):
+        super().__init__(name, supervisor, employee_count, location, meet)
         self.policies = set()
 
     def add_policy(self, policy_name, policy_text):
@@ -17,8 +17,15 @@ class HumanResources(Department):
     policy_name (string)
     policy_text (string)
     """
-
         self.policies.add((policy_name, policy_text))
+
+    def meet(self):
+        """This is my override"""
+        print("Everybody meet in Jerry\'s office.")
+
+    def get_budget(self):
+        self.budget = super().get_budget() - 500000
+        print("You guys don\'t need that much money!")
 
 ##########################################################################################################
 
@@ -30,10 +37,6 @@ class InformationTechnology(Department):
 
     def __init__(self, name, supervisor, employee_count, location, meet):
         super().__init__(name, supervisor, employee_count, location, meet)
-        self.name = name
-        self.supervisor = supervisor
-        self.employee_count = employee_count
-        self.location = location
 
     def standard_response_to_all_incoming_tickets(self):
         print("Did you reboot your computer?  Could you please?")
@@ -42,6 +45,14 @@ class InformationTechnology(Department):
         if not isinstance(ticket_count, int):
             raise TypeError('Please provide a number for the ticket count!')
         print("We have {} tickets to close".format(self.ticket_count))
+
+    def meet(self):
+        """This is my override"""
+        print("We don\'t have meetings; we improvise!!!")
+
+    def get_budget(self):
+        self.budget = super().get_budget() + 10000
+        print("Spend it all!")
 
 ##########################################################################################################
 
@@ -53,10 +64,6 @@ Methods: __init__, number_of_sales_this_month
 
     def __init__(self, name, supervisor, employee_count, location, meet):
         super().__init__(name, supervisor, employee_count, location, meet)
-        self.name = name
-        self.supervisor = supervisor
-        self.employee_count = employee_count
-        self.location = location
 
     def number_of_sales_this_month(self, number):
         if not isinstance(number, int):
@@ -67,6 +74,10 @@ Methods: __init__, number_of_sales_this_month
         """This is my override"""
         print("On second thought, let\'s have our meeting at Starbucks!")
 
+    def get_budget(self):
+        self.budget = super().get_budget() + 10000
+        print("Always be closing with your new iPads.")
+
 
 ##########################################################################################################
 
@@ -76,18 +87,25 @@ class InternalAudit(Department):
 Methods: __init__, number_of_employees_being_investigated
 """
 
-    def __init__(self, name, supervisor, employee_count, location):
-        super().__init__(name, supervisor, employee_count, location)
-        self.name = name
-        self.supervisor = supervisor
-        self.employee_count = employee_count
-        self.location = location
+    def __init__(self, name, supervisor, employee_count, location, meet):
+        super().__init__(name, supervisor, employee_count, location, meet)
 
     def number_of_employees_being_investigated(self, number):
         if not isinstance(number, int):
             raise TypeError('Please provide a number for the employees being investigated!')
         print("{} people have been stealing from the company".format(self.number))
 
+    def meet(self):
+        """This is my override"""
+        print("Meetings are a waste of time: throw all comments into chat!")
+
+    def get_budget(self):
+        self.budget = super().get_budget() + 2000
+        print("Pays for the licensing for the CatchYourAss software!")
+
+
+
+##########################################################################################################
 if __name__ == '__main__':
     hr = HumanResources('Talbot', 'Gilbert', 15)
     hr.add_policy('No Smoking', 'You cannot smoke at this company unless your name is Steve!')
