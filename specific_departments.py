@@ -1,4 +1,5 @@
 from bangazon import *
+import random
 
 class HumanResources(Department):
     """Class for representing Human Resources department
@@ -102,6 +103,31 @@ Methods: __init__, number_of_employees_being_investigated
     def get_budget(self):
         self.budget = super().get_budget() + 2000
         print("Pays for the licensing for the CatchYourAss software!")
+
+
+
+##########################################################################################################
+class Employee(Department):
+    """Class representing the individual employee"""
+
+    def __init__(self, first_name, last_name):
+        super().__init__()
+
+    def eat(self, food=None, *companions):
+        full_name = self.first_name + self.last_name
+        restaurant = ['J. Alexander\'s', 'Ruth\'s Chris', 'Stoney River', 'The Waffle House', 'Burger King']
+        one_restaurant = random.choice(restaurant)
+        if food and companions:
+            print("{} is at {}, has ordered {}, and {} is dining there as well".format(full_name, one_restaurant, food, companions[0]))
+        elif food is not None and companions is None:
+            print("{} took his {} back to the office".format(full_name, food))
+        elif food is None and companions is not None:
+            print("{} is at {} and {} will be joining".format(full_name, one_restaurant, companions))
+        else:
+            print("{} is eating at {} right this very minute!!!".format(full_name, one_restaurant))
+        return one_restaurant
+
+
 
 
 
