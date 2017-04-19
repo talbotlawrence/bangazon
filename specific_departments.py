@@ -13,12 +13,12 @@ class HumanResources(Department, PartTime):
         PartTime.__init__(self)
 
     def add_policy(self, policy_name, policy_text):
-    """Adds a policy, as a tuple, to the set of policies
+        """Adds a policy, as a tuple, to the set of policies
 
-    Arguments:
-    policy_name (string)
-    policy_text (string)
-    """
+        Arguments:
+        policy_name (string)
+        policy_text (string)
+        """
         self.policies.add((policy_name, policy_text))
 
     def meet(self):
@@ -149,9 +149,26 @@ class PartTime():
   def __init__(self):
     self.hours_per_week = 24
 
+##########################################################################################################
+
+class SecurityAccess():
+    """Describes which employees can get in the building and which ones cannot"""
+
+    def __init__(self):
+        self.clearance = True
+
+    def granted(self, name):
+        self.clearance = True
+        self.name = name
+        print("{} has access to the War Room".format(self.name))
+
+    def denied(self, name):
+        self.name = name
+        print("{} does not have access!".format(self.name))
 
 
 ##########################################################################################################
+
 if __name__ == '__main__':
     hr = HumanResources('Talbot', 'Gilbert', 15)
     hr.add_policy('No Smoking', 'You cannot smoke at this company unless your name is Steve!')

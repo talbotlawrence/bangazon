@@ -4,7 +4,7 @@ class Department():
     Methods: name, supervisor, employee_count, location, meet
     """
 
-    def __init__(self, name, supervisor, employee_count, location, meet):     #removed "meet" from this list
+    def __init__(self, name, supervisor, employee_count, location, meet):
         self.employees = set()
         self.name = name
         self.supervisor = supervisor
@@ -82,7 +82,7 @@ class Department():
         else:
             raise ValueError("Please provide the address for your department")
 
-#######################
+##########################################################################################################
 
     @property
     def meet(self):
@@ -101,7 +101,25 @@ class Department():
         else:
             raise ValueError("Gimme a room please!")
 
-#######################
-
+##########################################################################################################
+#should the budget be in init?
     def get_budget(self):
         self.budget = 1000000
+
+##########################################################################################################
+
+    def add_employee(self, employee):
+        self.employees.add(employee)
+        print(self.employees)
+        return self.employees
+
+    def remove_employee(self, employee):
+        self.employees.remove(employee)
+        print(self.employees)
+        return self.employees
+
+    def get_employees(self):
+        for employee in employees:
+            print(employee)
+
+#print("Department: {}\n\t{}".format(self.name, ))
