@@ -1,7 +1,7 @@
 from bangazon import *
 import random
 
-class HumanResources(Department):
+class HumanResources(Department, PartTime):
     """Class for representing Human Resources department
 
     Methods: __init__, add_policy, get_policy, etc.
@@ -10,6 +10,7 @@ class HumanResources(Department):
     def __init__(self, name, supervisor, employee_count, location, meet):
         super().__init__(name, supervisor, employee_count, location, meet)
         self.policies = set()
+        PartTime.__init__(self)
 
     def add_policy(self, policy_name, policy_text):
     """Adds a policy, as a tuple, to the set of policies
@@ -30,7 +31,7 @@ class HumanResources(Department):
 
 ##########################################################################################################
 
-class InformationTechnology(Department):
+class InformationTechnology(Department, FullTime):
     """Class for representing the IT department
 
     Methods: __init__, standard_response_to_all_incoming_tickets, number_of_tickets_submitted  
@@ -38,6 +39,7 @@ class InformationTechnology(Department):
 
     def __init__(self, name, supervisor, employee_count, location, meet):
         super().__init__(name, supervisor, employee_count, location, meet)
+        FullTime.__init__(self)
 
     def standard_response_to_all_incoming_tickets(self):
         print("Did you reboot your computer?  Could you please?")
@@ -57,7 +59,7 @@ class InformationTechnology(Department):
 
 ##########################################################################################################
 
-class Sales(Department):
+class Sales(Department, FullTime):
 """Class for representing the Sales department
 
 Methods: __init__, number_of_sales_this_month
@@ -65,6 +67,7 @@ Methods: __init__, number_of_sales_this_month
 
     def __init__(self, name, supervisor, employee_count, location, meet):
         super().__init__(name, supervisor, employee_count, location, meet)
+        FullTime.__init__(self)
 
     def number_of_sales_this_month(self, number):
         if not isinstance(number, int):
@@ -82,7 +85,7 @@ Methods: __init__, number_of_sales_this_month
 
 ##########################################################################################################
 
-class InternalAudit(Department):
+class InternalAudit(Department, PartTime)
 """Class for representing the Internal Audit department
 
 Methods: __init__, number_of_employees_being_investigated
@@ -90,6 +93,7 @@ Methods: __init__, number_of_employees_being_investigated
 
     def __init__(self, name, supervisor, employee_count, location, meet):
         super().__init__(name, supervisor, employee_count, location, meet)
+        PartTime.__init__(self)
 
     def number_of_employees_being_investigated(self, number):
         if not isinstance(number, int):
@@ -107,14 +111,17 @@ Methods: __init__, number_of_employees_being_investigated
 
 
 ##########################################################################################################
+
 class Employee(Department):
     """Class representing the individual employee"""
 
     def __init__(self, first_name, last_name):
-        super().__init__()
+        self.first_name = first_name
+        self.last_name = last_name
+        self.full_name = self.first_name + " " + self.last_name
 
+#This method below is not working
     def eat(self, food=None, *companions):
-        full_name = self.first_name + self.last_name
         restaurant = ['J. Alexander\'s', 'Ruth\'s Chris', 'Stoney River', 'The Waffle House', 'Burger King']
         one_restaurant = random.choice(restaurant)
         if food and companions:
@@ -127,7 +134,20 @@ class Employee(Department):
             print("{} is eating at {} right this very minute!!!".format(full_name, one_restaurant))
         return one_restaurant
 
+##########################################################################################################
 
+class FullTime():
+  """Describes full-time employees"""
+  
+  def __init__(self):
+    self.hours_per_week = 40
+
+
+class PartTime():
+  """Describes part-time employees"""
+
+  def __init__(self):
+    self.hours_per_week = 24
 
 
 
